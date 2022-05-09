@@ -1,0 +1,22 @@
+<ng-container *transloco="let t">
+    <!-- Button -->
+    <button mat-icon-button [matMenuTriggerFor]="schemes">
+        <ng-container *ngTemplateOutlet="schemeImage; context: {$implicit: activeScheme}"></ng-container>
+    </button>
+    
+    <!-- Language menu -->
+    <mat-menu [xPosition]="'before'" #schemes="matMenu">
+        <ng-container *ngFor="let scheme of availableSchemes;">
+            <button mat-menu-item (click)="setActiveScheme(scheme)">
+                <span class="flex items-center">
+                    <span class="ml-3">{{t(scheme) | titlecase}}</span>
+                </span>
+            </button>
+        </ng-container>
+    </mat-menu>
+    
+    <!-- Scheme icon template -->
+    <ng-template let-scheme #schemeImage>
+        <mat-icon [svgIcon]="schemeIcons[scheme]"></mat-icon>
+    </ng-template>
+</ng-container>
